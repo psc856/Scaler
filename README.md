@@ -226,10 +226,6 @@ curl http://localhost:5002/health
 4. Push to branch (`git push origin feature/amazing-feature`)
 5. Open Pull Request
 
-## 📝 License
-
-This project is licensed under the MIT License.
-
 ## 🆘 Troubleshooting
 
 ### Common Issues
