@@ -1,0 +1,91 @@
+@use '../../styles/variables' as *;
+@use 'sass:color';
+
+.recurrence-picker {
+  .recurrence-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-md;
+    background-color: $surface-variant;
+    border-radius: $radius-sm;
+
+    span {
+      font-size: 14px;
+      color: $text-primary;
+    }
+
+    .clear-button {
+      color: $google-red;
+      font-size: 13px;
+      padding: $spacing-xs $spacing-sm;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .recurrence-details {
+    summary {
+      padding: $spacing-md;
+      background-color: $surface-variant;
+      border-radius: $radius-sm;
+      cursor: pointer;
+      font-size: 14px;
+      color: $text-secondary;
+      transition: background-color $transition-fast;
+
+      &:hover {
+        background-color: color.adjust($surface-variant, $lightness: -3%);
+      }
+    }
+
+    .recurrence-form {
+      margin-top: $spacing-md;
+      padding: $spacing-md;
+      background-color: color.adjust($surface-variant, $lightness: 2%);
+      border-radius: $radius-sm;
+
+      .form-field {
+        margin-bottom: $spacing-md;
+
+        label {
+          display: block;
+          font-size: 13px;
+          color: $text-secondary;
+          margin-bottom: $spacing-xs;
+        }
+
+        input,
+        select {
+          width: 100%;
+          padding: $spacing-sm;
+          border: 1px solid $border-light;
+          border-radius: $radius-sm;
+          font-size: 14px;
+        }
+
+        span {
+          margin-left: $spacing-sm;
+          font-size: 13px;
+          color: $text-secondary;
+        }
+      }
+
+      .apply-button {
+        width: 100%;
+        padding: $spacing-sm;
+        background-color: $google-blue;
+        color: white;
+        border-radius: $radius-sm;
+        font-weight: 500;
+        transition: background-color $transition-fast;
+
+        &:hover {
+          background-color: $google-blue-hover;
+        }
+      }
+    }
+  }
+}

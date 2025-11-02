@@ -1,0 +1,197 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+@use 'sass:color';
+
+.gmail-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  @include flex-center;
+  z-index: $z-modal-backdrop;
+  animation: fadeIn $transition-base;
+  backdrop-filter: blur(4px);
+}
+
+.gmail-modal {
+  background: $background-primary;
+  border-radius: $radius-lg;
+  width: 90%;
+  max-width: 480px;
+  box-shadow: $shadow-xl;
+  animation: slideInUp $transition-base;
+
+  @include mobile {
+    width: calc(100% - #{$spacing-md * 2});
+    margin: $spacing-md;
+  }
+
+  .gmail-modal-header {
+    @include flex-between;
+    padding: $spacing-lg;
+    border-bottom: 1px solid $border-light;
+
+    h2 {
+      @include flex-center;
+      gap: $spacing-sm;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: $text-primary;
+      margin: 0;
+
+      svg {
+        color: $google-blue;
+      }
+    }
+
+    .close-button {
+      @include button-reset;
+      width: 40px;
+      height: 40px;
+      border-radius: $radius-full;
+      @include flex-center;
+      color: $text-secondary;
+      @include transition-all;
+
+      &:hover {
+        background-color: $surface-hover;
+      }
+    }
+  }
+
+  .gmail-modal-content {
+    padding: $spacing-lg;
+
+    .integration-info {
+      margin-bottom: $spacing-lg;
+
+      h3 {
+        font-size: 1rem;
+        font-weight: 500;
+        color: $text-primary;
+        margin-bottom: $spacing-md;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          display: flex;
+          align-items: center;
+          padding: $spacing-sm 0;
+          color: $text-secondary;
+          font-size: 0.875rem;
+
+          &:before {
+            content: "•";
+            color: $google-blue;
+            font-size: 1.5rem;
+            margin-right: $spacing-sm;
+            line-height: 1;
+          }
+        }
+      }
+    }
+
+    .error-message {
+      padding: $spacing-md;
+      background-color: color.adjust($google-red, $lightness: 48%);
+      border-radius: $radius-md;
+      color: $google-red;
+      font-size: 0.875rem;
+      margin-bottom: $spacing-lg;
+      border-left: 3px solid $google-red;
+    }
+  }
+
+  .gmail-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: $spacing-sm;
+    margin-top: $spacing-lg;
+    padding-top: $spacing-lg;
+    border-top: 1px solid $border-light;
+
+    @include mobile {
+      flex-direction: column;
+    }
+
+    button {
+      @include button-reset;
+      @include flex-center;
+      gap: $spacing-sm;
+      padding: $spacing-sm $spacing-lg;
+      border-radius: $radius-md;
+      font-weight: 500;
+      font-size: 0.875rem;
+      min-width: 120px;
+      @include transition-all;
+
+      @include mobile {
+        width: 100%;
+        padding: $spacing-md;
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+
+    .cancel-button {
+      color: $text-secondary;
+      border: 1.5px solid $border-light;
+
+      &:hover:not(:disabled) {
+        background-color: $surface-hover;
+      }
+    }
+
+    .connect-button {
+      background-color: $google-blue;
+      color: white;
+
+      &:hover:not(:disabled) {
+        background-color: $google-blue-hover;
+        transform: translateY(-1px);
+      }
+
+      .spinning {
+        animation: spin 1s linear infinite;
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

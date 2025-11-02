@@ -1,0 +1,103 @@
+@use '../../styles/variables' as *;
+
+.location-picker {
+  position: relative;
+
+  .location-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .location-icon {
+      position: absolute;
+      left: $spacing-md;
+      color: $text-secondary;
+      pointer-events: none;
+    }
+
+    .location-input {
+      width: 100%;
+      padding: $spacing-sm $spacing-xl $spacing-sm 42px;
+      border: 1px solid $border-light;
+      border-radius: $radius-sm;
+      font-size: 14px;
+      transition: border-color $transition-fast;
+
+      &:focus {
+        border-color: $google-blue;
+        outline: none;
+      }
+
+      &::placeholder {
+        color: $text-tertiary;
+      }
+    }
+
+    .clear-button {
+      position: absolute;
+      right: $spacing-sm;
+      width: 24px;
+      height: 24px;
+      border-radius: $radius-full;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $text-secondary;
+      transition: background-color $transition-fast;
+
+      &:hover {
+        background-color: $surface-variant;
+      }
+    }
+  }
+
+  .location-suggestions {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid $border-light;
+    border-radius: $radius-sm;
+    box-shadow: $shadow-md;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 100;
+
+    .suggestions-header {
+      padding: $spacing-sm $spacing-md;
+      font-size: 12px;
+      font-weight: 600;
+      color: $text-secondary;
+      text-transform: uppercase;
+      border-bottom: 1px solid $border-light;
+      margin: 0;
+    }
+
+    .location-suggestion-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      padding: $spacing-md;
+      text-align: left;
+      transition: background-color $transition-fast;
+      border: none;
+      background: none;
+
+      &:hover {
+        background-color: $surface-variant;
+      }
+
+      .suggestion-icon {
+        font-size: 20px;
+        flex-shrink: 0;
+      }
+
+      .suggestion-name {
+        font-size: 14px;
+        color: $text-primary;
+      }
+    }
+  }
+}

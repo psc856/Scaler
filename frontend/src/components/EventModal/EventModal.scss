@@ -1,0 +1,400 @@
+@use '../../styles/variables' as *;
+@use 'sass:color';
+
+.event-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: $z-modal-backdrop;
+  animation: fadeIn $transition-base;
+}
+
+.event-modal {
+  background: $background-primary;
+  border-radius: $radius-lg;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: $shadow-lg;
+  animation: slideInUp $transition-base;
+
+  .event-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-lg;
+    border-bottom: 1px solid $border-light;
+
+    h2 {
+      font-size: 24px;
+      font-weight: 400;
+      color: $text-primary;
+      margin: 0;
+    }
+
+    .close-button {
+      width: 40px;
+      height: 40px;
+      border-radius: $radius-full;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $text-secondary;
+      transition: background-color $transition-fast;
+
+      &:hover {
+        background-color: $surface-variant;
+      }
+    }
+  }
+
+  .event-modal-form {
+    padding: $spacing-lg;
+
+    .form-group {
+      margin-bottom: $spacing-lg;
+
+      label {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        font-size: 14px;
+        font-weight: 500;
+        color: $text-secondary;
+        margin-bottom: $spacing-sm;
+      }
+
+      input[type="text"],
+      input[type="datetime-local"],
+      textarea,
+      select {
+        width: 100%;
+        padding: $spacing-md;
+        border: 1px solid $border-light;
+        border-radius: $radius-sm;
+        font-size: 14px;
+        transition: border-color $transition-fast;
+
+        &:focus {
+          border-color: $google-blue;
+          outline: none;
+        }
+
+        &.error {
+          border-color: $google-red;
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        font-family: inherit;
+      }
+
+      .error-message {
+        display: block;
+        color: $google-red;
+        font-size: 12px;
+        margin-top: $spacing-xs;
+      }
+
+      &.checkbox-group {
+        label {
+          cursor: pointer;
+          user-select: none;
+
+          input[type="checkbox"] {
+            margin-right: $spacing-sm;
+          }
+        }
+      }
+    }
+
+    .input-with-ai {
+      display: flex;
+      gap: $spacing-sm;
+
+      input {
+        flex: 1;
+      }
+
+      .ai-button {
+        width: 40px;
+        height: 40px;
+        border-radius: $radius-sm;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $surface-variant;
+        color: $google-blue;
+        transition: all $transition-fast;
+
+        &:hover {
+          background-color: color.adjust($google-blue, $lightness: 45%);
+        }
+      }
+    }
+
+    .ai-suggestions {
+      margin-top: $spacing-md;
+      padding: $spacing-md;
+      background-color: color.adjust($google-blue, $lightness: 48%);
+      border-radius: $radius-sm;
+      border-left: 3px solid $google-blue;
+
+      .suggestions-label {
+        font-size: 12px;
+        font-weight: 500;
+        color: $google-blue;
+        margin-bottom: $spacing-sm;
+      }
+
+      .suggestions-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-sm;
+
+        .suggestion-chip {
+          padding: $spacing-xs $spacing-md;
+          background-color: white;
+          border: 1px solid $google-blue;
+          border-radius: $radius-full;
+          color: $google-blue;
+          font-size: 13px;
+          transition: all $transition-fast;
+
+          &:hover {
+            background-color: $google-blue;
+            color: white;
+          }
+        }
+      }
+    }
+
+    .ai-time-button {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      padding: $spacing-sm $spacing-md;
+      margin-top: $spacing-sm;
+      background-color: color.adjust($google-blue, $lightness: 48%);
+      color: $google-blue;
+      border-radius: $radius-sm;
+      font-size: 13px;
+      transition: all $transition-fast;
+
+      &:hover {
+        background-color: color.adjust($google-blue, $lightness: 45%);
+      }
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-md;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .spinning {
+    animation: spin 1s linear infinite;
+    }
+
+    .confidence-badge {
+    margin-left: $spacing-xs;
+    padding: 2px 6px;
+    background-color: rgba(25, 103, 210, 0.2);
+    color: $google-blue;
+    border-radius: $radius-full;
+    font-size: 10px;
+    font-weight: 600;
+    }
+
+    .suggestion-chip {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    span {
+            display: inline-block;
+    }
+    }
+
+    @keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+    }
+
+    .ai-suggestions {
+    margin-top: $spacing-md;
+    padding: $spacing-md;
+    background-color: color.adjust($google-blue, $lightness: 48%);
+    border-radius: $radius-sm;
+    border-left: 3px solid $google-blue;
+
+    .suggestions-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: $spacing-sm;
+
+        .suggestions-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: $google-blue;
+        margin: 0;
+        }
+
+        .close-suggestions {
+        width: 20px;
+        height: 20px;
+        border-radius: $radius-full;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $text-secondary;
+        transition: background-color $transition-fast;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        }
+    }
+
+    .suggestions-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-sm;
+
+        .suggestion-chip {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        padding: $spacing-xs $spacing-md;
+        background-color: white;
+        border: 1px solid $google-blue;
+        border-radius: $radius-full;
+        color: $google-blue;
+        font-size: 13px;
+        transition: all $transition-fast;
+
+        &:hover {
+            background-color: $google-blue;
+            color: white;
+
+            .frequency-badge {
+            background-color: rgba(255, 255, 255, 0.3);
+            color: white;
+            }
+        }
+
+        .frequency-badge {
+            padding: 2px 6px;
+            background-color: color.adjust($google-blue, $lightness: 45%);
+            color: $google-blue;
+            border-radius: $radius-full;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        }
+    }
+    }
+
+    .ai-time-button {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    margin-top: $spacing-sm;
+    background-color: color.adjust($google-blue, $lightness: 48%);
+    color: $google-blue;
+    border-radius: $radius-sm;
+    font-size: 13px;
+    transition: all $transition-fast;
+    width: 100%;
+    justify-content: center;
+
+    &:hover:not(:disabled) {
+        background-color: color.adjust($google-blue, $lightness: 45%);
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    span {
+        line-height: 1.4;
+    }
+    }
+
+
+    .form-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: $spacing-xl;
+      padding-top: $spacing-lg;
+      border-top: 1px solid $border-light;
+
+      .actions-left,
+      .actions-right {
+        display: flex;
+        gap: $spacing-sm;
+      }
+
+      button {
+        padding: $spacing-sm $spacing-lg;
+        border-radius: $radius-sm;
+        font-weight: 500;
+        font-size: 14px;
+        transition: all $transition-fast;
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+      }
+
+      .delete-button {
+        color: $google-red;
+        background-color: color.adjust($google-red, $lightness: 48%);
+
+        &:hover:not(:disabled) {
+          background-color: color.adjust($google-red, $lightness: 45%);
+        }
+      }
+
+      .cancel-button {
+        color: $text-secondary;
+        border: 1px solid $border-light;
+
+        &:hover:not(:disabled) {
+          background-color: $surface-variant;
+        }
+      }
+
+      .save-button {
+        background-color: $google-blue;
+        color: white;
+
+        &:hover:not(:disabled) {
+          background-color: $google-blue-hover;
+        }
+
+        &:disabled {
+          opacity: 0.6;
+        }
+      }
+    }
+  }
+}

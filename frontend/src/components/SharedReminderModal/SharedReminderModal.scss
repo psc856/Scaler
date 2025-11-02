@@ -1,0 +1,317 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+@use 'sass:color';
+
+.shared-reminder-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  @include flex-center;
+  z-index: $z-modal-backdrop;
+  animation: fadeIn $transition-base;
+  backdrop-filter: blur(4px);
+}
+
+.shared-reminder-modal {
+  background: $background-primary;
+  border-radius: $radius-lg;
+  width: 90%;
+  max-width: 480px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: slideInUp $transition-base;
+
+  @include mobile {
+    width: calc(100% - #{$spacing-md * 2});
+    margin: $spacing-md;
+  }
+
+  .shared-reminder-modal-header {
+    @include flex-between;
+    padding: $spacing-lg;
+    border-bottom: 1px solid $border-light;
+
+    h2 {
+      @include flex-center;
+      gap: $spacing-sm;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: $text-primary;
+      margin: 0;
+
+      svg {
+        color: $google-blue;
+      }
+    }
+
+    .close-button {
+      @include button-reset;
+      width: 40px;
+      height: 40px;
+      border-radius: $radius-full;
+      @include flex-center;
+      color: $text-secondary;
+      @include transition-all;
+
+      &:hover {
+        background-color: $surface-hover;
+      }
+    }
+  }
+
+  .shared-reminder-modal-content {
+    padding: $spacing-lg;
+
+    .subscription-section {
+      margin-bottom: $spacing-lg;
+
+      .subscription-toggle {
+        @include button-reset;
+        @include flex-center;
+        width: 100%;
+        gap: $spacing-sm;
+        padding: $spacing-md;
+        border-radius: $radius-md;
+        font-size: 0.875rem;
+        color: $text-secondary;
+        background-color: $surface-variant;
+        border: 1.5px solid $border-light;
+        @include transition-all;
+
+        &.subscribed {
+          background-color: color.adjust($google-blue, $lightness: 45%);
+          color: $google-blue;
+          border-color: $google-blue;
+
+          svg {
+            animation: bell-ring 1s ease;
+          }
+        }
+
+        &:hover:not(:disabled) {
+          background-color: $surface-hover;
+          transform: translateY(-1px);
+        }
+
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+      }
+    }
+
+    .add-participant-form {
+      display: flex;
+      gap: $spacing-sm;
+      margin-bottom: $spacing-lg;
+
+      input {
+        flex: 1;
+        padding: $spacing-md;
+        border: 1.5px solid $border-light;
+        border-radius: $radius-md;
+        font-size: 0.875rem;
+        @include transition-all;
+        @include input-focus;
+
+        &:disabled {
+          background-color: $surface-variant;
+          cursor: not-allowed;
+        }
+      }
+
+      .add-button {
+        @include button-reset;
+        @include flex-center;
+        gap: $spacing-sm;
+        padding: $spacing-sm $spacing-lg;
+        border-radius: $radius-md;
+        background-color: $google-blue;
+        color: white;
+        font-weight: 500;
+        @include transition-all;
+
+        &:hover:not(:disabled) {
+          background-color: $google-blue-hover;
+          transform: translateY(-1px);
+        }
+
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+
+        .spinning {
+          animation: spin 1s linear infinite;
+        }
+      }
+    }
+
+    .search-section {
+      position: relative;
+      margin-bottom: $spacing-lg;
+
+      svg {
+        position: absolute;
+        left: $spacing-md;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $text-secondary;
+      }
+
+      input {
+        width: 100%;
+        padding: $spacing-md;
+        padding-left: calc(#{$spacing-md} * 2 + 18px);
+        border: 1.5px solid $border-light;
+        border-radius: $radius-md;
+        font-size: 0.875rem;
+        @include transition-all;
+        @include input-focus;
+      }
+    }
+
+    .participants-list {
+      max-height: 400px;
+      overflow-y: auto;
+      @include scrollbar;
+
+      .loading-state,
+      .empty-state {
+        @include flex-center;
+        flex-direction: column;
+        gap: $spacing-md;
+        padding: $spacing-xl 0;
+        color: $text-secondary;
+        text-align: center;
+
+        svg {
+          color: color.adjust($text-secondary, $alpha: -0.5);
+        }
+
+        p {
+          margin: 0;
+          font-weight: 500;
+        }
+
+        span {
+          font-size: 0.875rem;
+        }
+
+        .spinning {
+          animation: spin 1s linear infinite;
+        }
+      }
+
+      .participant-item {
+        @include flex-between;
+        padding: $spacing-md;
+        border-radius: $radius-md;
+        @include transition-all;
+
+        &:hover {
+          background-color: $surface-variant;
+
+          .remove-button {
+            opacity: 1;
+          }
+        }
+
+        .participant-info {
+          @include flex-center;
+          gap: $spacing-md;
+
+          .avatar {
+            width: 40px;
+            height: 40px;
+            @include flex-center;
+            background-color: color.adjust($google-blue, $lightness: 45%);
+            color: $google-blue;
+            border-radius: $radius-full;
+            font-weight: 600;
+            font-size: 1rem;
+          }
+
+          .details {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+
+            .name {
+              font-weight: 500;
+              color: $text-primary;
+            }
+
+            .email {
+              font-size: 0.75rem;
+              color: $text-secondary;
+            }
+          }
+        }
+
+        .remove-button {
+          @include button-reset;
+          width: 32px;
+          height: 32px;
+          @include flex-center;
+          border-radius: $radius-full;
+          color: $google-red;
+          opacity: 0;
+          @include transition-all;
+
+          &:hover:not(:disabled) {
+            background-color: color.adjust($google-red, $lightness: 45%);
+          }
+
+          &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes bell-ring {
+  0%, 100% {
+    transform: rotate(0);
+  }
+  20%, 60% {
+    transform: rotate(30deg);
+  }
+  40%, 80% {
+    transform: rotate(-30deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

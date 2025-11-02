@@ -1,0 +1,106 @@
+@use '../../styles/variables' as *;
+@use 'sass:color';
+
+.event-card {
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+  border-left: 4px solid rgba(0, 0, 0, 0.2);
+  margin-bottom: $spacing-xs;
+  box-shadow: $shadow-sm;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-1px);
+  }
+
+  .event-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-xs;
+
+    .event-title {
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .recurring-icon {
+      flex-shrink: 0;
+      opacity: 0.8;
+    }
+  }
+
+  .event-card-details {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    font-size: 12px;
+    opacity: 0.9;
+
+    .event-time,
+    .event-location {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+
+      svg {
+        flex-shrink: 0;
+      }
+
+      span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    .event-duration {
+      margin-left: $spacing-xs;
+      opacity: 0.7;
+    }
+  }
+
+  .event-description {
+    margin-top: $spacing-xs;
+    font-size: 12px;
+    opacity: 0.8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    /* Cross-browser line clamping */
+    display: -webkit-box;       // WebKit browsers
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    display: box;               // Fallback for older browsers
+    box-orient: vertical;
+    line-clamp: 2;
+
+    line-height: 1.4;
+  }
+}
+
+// Small event variant (for calendar grid)
+.event-card-small {
+  padding: 2px $spacing-xs;
+  border-radius: 2px;
+  font-size: 12px;
+  margin-bottom: 2px;
+  border-left: 3px solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all $transition-fast;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+}

@@ -1,0 +1,30 @@
+@use '../../styles/variables' as *;
+@use 'sass:color';
+
+.color-picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+  gap: $spacing-sm;
+
+  .color-option {
+    width: 40px;
+    height: 40px;
+    border-radius: $radius-full;
+    border: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all $transition-fast;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: $shadow-md;
+    }
+
+    &.selected {
+      border-color: $text-primary;
+      transform: scale(1.15);
+    }
+  }
+}

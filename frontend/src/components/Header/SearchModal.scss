@@ -1,0 +1,176 @@
+@use '../../styles/variables' as *;
+
+.search-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: $z-modal;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10vh;
+}
+
+.search-modal {
+  background: white;
+  border-radius: $radius-lg;
+  width: 90%;
+  max-width: 700px;
+  max-height: 70vh;
+  overflow: hidden;
+  box-shadow: $shadow-lg;
+
+  .search-modal-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .search-header {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      padding: $spacing-lg;
+      border-bottom: 1px solid $border-light;
+
+      .search-input-wrapper {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        padding: $spacing-sm $spacing-md;
+        background: $surface-variant;
+        border-radius: $radius-md;
+
+        svg {
+          color: $text-secondary;
+        }
+
+        input {
+          flex: 1;
+          border: none;
+          background: none;
+          font-size: 16px;
+          outline: none;
+
+          &::placeholder {
+            color: $text-tertiary;
+          }
+        }
+
+        .clear-search {
+          padding: 4px;
+          border-radius: $radius-full;
+          color: $text-secondary;
+
+          &:hover {
+            background: rgba(0, 0, 0, 0.1);
+          }
+        }
+      }
+
+      .close-search {
+        padding: $spacing-sm;
+        border-radius: $radius-full;
+        color: $text-secondary;
+
+        &:hover {
+          background: $surface-variant;
+        }
+      }
+    }
+
+    .search-results {
+      flex: 1;
+      overflow-y: auto;
+      padding: $spacing-md;
+
+      .search-empty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: $spacing-xl;
+        color: $text-secondary;
+        text-align: center;
+
+        svg {
+          opacity: 0.3;
+          margin-bottom: $spacing-md;
+        }
+      }
+
+      .results-list {
+        .results-count {
+          font-size: 13px;
+          color: $text-secondary;
+          margin-bottom: $spacing-md;
+        }
+
+        .result-item {
+          display: flex;
+          gap: $spacing-md;
+          padding: $spacing-md;
+          border-radius: $radius-md;
+          cursor: pointer;
+          transition: background $transition-fast;
+          margin-bottom: $spacing-sm;
+
+          &:hover {
+            background: $surface-variant;
+          }
+
+          .event-color-indicator {
+            width: 4px;
+            border-radius: $radius-full;
+            flex-shrink: 0;
+          }
+
+          .event-details {
+            flex: 1;
+
+            h4 {
+              font-size: 15px;
+              font-weight: 500;
+              color: $text-primary;
+              margin: 0 0 $spacing-xs 0;
+            }
+
+            .event-meta {
+              display: flex;
+              gap: $spacing-md;
+              font-size: 13px;
+              color: $text-secondary;
+              margin-bottom: $spacing-xs;
+
+              span {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+              }
+            }
+
+            .event-description {
+              font-size: 13px;
+              color: $text-tertiary;
+              margin: 0;
+              overflow: hidden;
+              text-overflow: ellipsis;
+
+              display: -webkit-box; /* Fallback for Webkit browsers */
+              -webkit-line-clamp: 2; /* Limit to 2 lines */
+              -webkit-box-orient: vertical; /* Define vertical orientation */
+
+              /* Future-proof standard syntax (not yet widely supported) */
+              display: block; /* Ensure block display for non-webkit browsers */
+              line-clamp: 2; /* Apply standard line-clamp for future compatibility */
+              box-orient: vertical; /* Standard box-orient property for future */
+            }
+          }
+        }
+      }
+    }
+  }
+}

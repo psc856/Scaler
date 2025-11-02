@@ -1,0 +1,85 @@
+@use '../../styles/variables' as *;
+
+.time-picker {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  &.error {
+    .date-input,
+    .time-select {
+      border-color: $google-red;
+    }
+  }
+
+  .date-input {
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid $border-light;
+    border-radius: $radius-sm;
+    font-size: 14px;
+    transition: border-color $transition-fast;
+    background-color: white;
+    cursor: pointer;
+
+    &:focus {
+      border-color: $google-blue;
+      outline: none;
+    }
+
+    &::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+    }
+  }
+
+  .time-input-group {
+    display: flex;
+    gap: $spacing-sm;
+    align-items: center;
+
+    .time-select {
+      flex: 1;
+      padding: $spacing-sm $spacing-md;
+      border: 1px solid $border-light;
+      border-radius: $radius-sm;
+      font-size: 14px;
+      transition: border-color $transition-fast;
+      background-color: white;
+      cursor: pointer;
+
+      &:focus {
+        border-color: $google-blue;
+        outline: none;
+      }
+    }
+
+    .period-toggle {
+      display: flex;
+      background-color: $surface-variant;
+      border-radius: $radius-sm;
+      padding: 2px;
+
+      .period-button {
+        padding: $spacing-xs $spacing-md;
+        border-radius: $radius-sm;
+        font-size: 13px;
+        font-weight: 500;
+        color: $text-secondary;
+        transition: all $transition-fast;
+        min-width: 45px;
+        border: none;
+        background: none;
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        &.active {
+          background-color: $google-blue;
+          color: white;
+        }
+      }
+    }
+  }
+}

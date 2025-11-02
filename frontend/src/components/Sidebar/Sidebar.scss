@@ -1,0 +1,116 @@
+@use '../../styles/variables' as *;
+@use 'sass:color';
+
+.sidebar {
+  width: $sidebar-width;
+  background: $background-primary;
+  border-right: 1px solid $border-light;
+  padding: $spacing-md;
+  height: calc(100vh - $header-height);
+  overflow-y: auto;
+  position: sticky;
+  top: $header-height;
+
+  .create-event-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    width: 100%;
+    padding: $spacing-md;
+    background: $background-primary;
+    border: 1px solid $border-light;
+    border-radius: $radius-full;
+    font-weight: 500;
+    font-size: 14px;
+    color: $text-primary;
+    box-shadow: $shadow-sm;
+    transition: all $transition-fast;
+    margin-bottom: $spacing-lg;
+
+    &:hover {
+      box-shadow: $shadow-md;
+      transform: translateY(-1px);
+    }
+  }
+
+  .sidebar-section {
+    margin-bottom: $spacing-lg;
+    padding-bottom: $spacing-lg;
+    border-bottom: 1px solid $border-light;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      font-size: 14px;
+      font-weight: 500;
+      color: $text-primary;
+      margin-bottom: $spacing-md;
+    }
+
+    .section-description {
+      font-size: 12px;
+      color: $text-secondary;
+      line-height: 1.4;
+    }
+  }
+
+  .calendar-list {
+    .calendar-item {
+      display: flex;
+      align-items: center;
+      padding: $spacing-sm 0;
+      
+      input[type="checkbox"] {
+        margin-right: $spacing-sm;
+      }
+
+      label {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        cursor: pointer;
+        font-size: 14px;
+        color: $text-primary;
+      }
+
+      .calendar-color {
+        width: 12px;
+        height: 12px;
+        border-radius: $radius-full;
+      }
+
+      .calendar-name {
+        flex: 1;
+      }
+    }
+  }
+
+  .sidebar-shortcuts {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+
+    .shortcut-item {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      padding: $spacing-sm $spacing-md;
+      border-radius: $radius-sm;
+      color: $text-secondary;
+      font-size: 14px;
+      transition: all $transition-fast;
+      text-align: left;
+
+      &:hover {
+        background-color: $surface-variant;
+        color: $text-primary;
+      }
+    }
+  }
+}
